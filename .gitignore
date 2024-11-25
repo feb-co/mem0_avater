@@ -128,6 +128,7 @@ env.bak/
 venv.bak/
 pyenv/
 .gradio
+.github
 
 # Spyder project settings
 .spyderproject
