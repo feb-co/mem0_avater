@@ -2,7 +2,7 @@
 name = "mem0avater"
 version = "0.0.1"
 description = "Long-term memory for AI Agents"
-authors = ["Mem0 <founders@vropco.ai>"]
+authors = ["VrOPCO <founders@vropco.ai>"]
 exclude = [
     "db",
     "configs",
