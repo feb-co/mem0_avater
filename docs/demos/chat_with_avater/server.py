@@ -50,29 +50,35 @@ class ChatAvater:
 
 
 bot = ChatAvater()
-
 with gr.Blocks() as demo:
-    gr.Markdown("# ChatGPT 对话界面")
+    gr.Markdown("# Chat with Avater")
 
     with gr.Row():
-        api_key_input = gr.Textbox(
-            label="OpenAI API Key",
-            placeholder="在此输入你的 OpenAI API Key...",
-            type="password"
-        )
-        api_key_button = gr.Button("设置 API Key")
+        # 左侧列 - 对话历史
+        with gr.Column(scale=6):
+            chatbot = gr.Chatbot(label="Dialogue History", height=600)
 
-    with gr.Row():
-        model_selector = gr.Dropdown(
-            choices=["gpt-3.5-turbo", "gpt-4", "gpt-4o"],
-            label="选择模型",
-            value="gpt-4o"
-        )
+        # 右侧列 - 控制面板
+        with gr.Column(scale=4):
+            with gr.Group():
+                api_key_input = gr.Textbox(
+                    label="OpenAI API Key",
+                    placeholder="在此输入你的 OpenAI API Key...",
+                    type="password"
+                )
+                api_key_button = gr.Button("设置 API Key")
 
-    chatbot = gr.Chatbot(label="对话历史")
-    msg = gr.Textbox(label="输入消息")
-    clear = gr.Button("清除对话")
+            with gr.Group():
+                model_selector = gr.Dropdown(
+                    choices=["gpt-3.5-turbo", "gpt-4", "gpt-4o"],
+                    label="选择模型",
+                    value="gpt-4o"
+                )
 
+            msg = gr.Textbox(label="输入消息")
+            clear = gr.Button("Clear History")
+
+    # 事件处理保持不变
     api_key_button.click(
         fn=bot.set_api_key,
         inputs=api_key_input,
