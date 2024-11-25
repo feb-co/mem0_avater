@@ -9,7 +9,7 @@ Mem0 是一个智能对话记忆系统，它能够从对话中提取和管理两
   <span style="font-size: 1.2em;">New Feature: Introducing Graph Memory. Check out our <a href="https://docs.mem0.ai/open-source/graph-memory" target="_blank">documentation</a>.</span>
 </p>
 
-## 核心特性
+## Core Features
 
 ### 1. 双重记忆模型
 
@@ -35,6 +35,37 @@ Mem0 是一个智能对话记忆系统，它能够从对话中提取和管理两
 - 自动分析对话片段在整体中的位置
 - 生成上下文解释以增强检索效果
 - 支持多轮对话的上下文理解
+
+## Get Started
+
+The easiest way to set up Mem0 is through the managed [Mem0 Platform](https://app.mem0.ai). This hosted solution offers automatic updates, advanced analytics, and dedicated support. [Sign up](https://app.mem0.ai) to get started.
+
+If you prefer to self-host, use the open-source Mem0 package. Follow the [installation instructions](#install) to get started.
+
+## Installation Instructions <a name="install"></a>
+
+> [!IMPORTANT]
+> Installation is mandatory.
+
+```bash
+git clone --depth 1 https://github.com/feb-co/mem0_avater.git
+cd mem0_avater
+pip install -e .
+```
+
+### Basic Usage
+
+- `add()`: 添加新记忆
+- `search()`: 检索相关记忆
+- `get_all()`: 获取所有记忆
+- `get_context_explanation()`: 获取上下文解释
+
+### 必要参数
+
+每个操作都需要提供以下标识符之一：
+- user_id: 用户标识
+- agent_id: 代理标识
+- run_id: 运行标识
 
 ## 技术实现
 
@@ -191,22 +222,6 @@ memories = memory.search(
     agent_id="observation"  # 或 "context"
 )
 ```
-
-## API 说明
-
-### 主要方法
-
-- `add()`: 添加新记忆
-- `search()`: 检索相关记忆
-- `get_all()`: 获取所有记忆
-- `get_context_explanation()`: 获取上下文解释
-
-### 必要参数
-
-每个操作都需要提供以下标识符之一：
-- user_id: 用户标识
-- agent_id: 代理标识
-- run_id: 运行标识
 
 ## 注意事项
 

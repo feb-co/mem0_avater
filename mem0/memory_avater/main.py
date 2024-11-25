@@ -1,30 +1,30 @@
-from mem0 import Memory
-import logging
-
-
-import concurrent
-import warnings
 
 import json
 import logging
+import concurrent
+import warnings
 from copy import deepcopy
-
 from pydantic import ValidationError
-
 from typing import Any, Dict
 
 from mem0.configs.base import MemoryConfig, MemoryItem
 from mem0.configs.prompts import get_update_memory_messages
+
+from mem0.memory.main import Memory
 from mem0.memory.telemetry import capture_event
 from mem0.memory.utils import get_fact_retrieval_messages, parse_messages
-from mem0.utils.factory import EmbedderFactory, LlmFactory, VectorStoreFactory
 from mem0.memory.storage import SQLiteManager
-from mem0.memory_dialogue.memory_base_worker import MemoryBaseWorker
-from mem0.memory_dialogue.prompt_context_explain import CONTEXT_EXPLAIN_PROMPT
+
+from mem0.utils.factory import EmbedderFactory, LlmFactory, VectorStoreFactory
+
+from mem0.memory_avater.memory_base_worker import MemoryBaseWorker
+from mem0.memory_avater.prompt_context_explain import CONTEXT_EXPLAIN_PROMPT
+
+
 logger = logging.getLogger(__name__)
 
 
-class ChatMemory(Memory):
+class AvaterMemory(Memory):
     def __init__(self, config: MemoryConfig = MemoryConfig()):
         
         if not hasattr(config, 'version'):
