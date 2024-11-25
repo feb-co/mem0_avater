@@ -4,6 +4,11 @@
 
 Mem0 是一个智能对话记忆系统，它能够从对话中提取和管理两种类型的长时记忆：上下文记忆(Context)和观察记忆(Observation)。系统通过向量存储和图结构来组织记忆，支持高效的检索和更新。
 
+<p style="display: flex;">
+  <img src="https://media.tenor.com/K3j9pwWlME0AAAAi/fire-flame.gif" alt="Graph Memory Integration" style="width: 25px; margin-right: 10px;" />
+  <span style="font-size: 1.2em;">New Feature: Introducing Graph Memory. Check out our <a href="https://docs.mem0.ai/open-source/graph-memory" target="_blank">documentation</a>.</span>
+</p>
+
 ## 核心特性
 
 ### 1. 双重记忆模型
