@@ -29,7 +29,7 @@ class MemoryProfile:
             profiles_info.append(f"**{keyword}**: {profile.get_profile_description(keyword)}")
         return profiles_info
 
-    async def get_profile(self, profile_id: int):
+    async def get_profile(self, profile_id):
         """
         Get user profile by user ID.
 
@@ -42,7 +42,7 @@ class MemoryProfile:
         profile = await self.db.get_profile(profile_id)
         return self.profile_schema_cls.from_json_str(profile)
 
-    async def _set_profile(self, profile_id: int, profile):
+    async def _set_profile(self, profile_id, profile):
         old_profile = await self.db.get_profile(profile_id)
         if old_profile is None:
             await self.db.insert_profile(profile_id, profile)
