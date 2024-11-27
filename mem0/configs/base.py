@@ -5,9 +5,10 @@ from pydantic import BaseModel, Field
 
 from mem0.embeddings.configs import EmbedderConfig
 from mem0.graphs.configs import GraphStoreConfig
-from mem0.history.configs import HistoryDBConfig
+from mem0.database.history.configs import HistoryDBConfig
+from mem0.database.profile.configs import ProfileDBConfig
 from mem0.llms.configs import LlmConfig
-from mem0.memory.setup import mem0_dir
+from mem0.memory.base.setup import mem0_dir
 from mem0.vector_stores.configs import VectorStoreConfig
 
 
@@ -41,6 +42,10 @@ class MemoryConfig(BaseModel):
         description="Configuration for the history db",
         default_factory=HistoryDBConfig,
     )
+    profile_db: ProfileDBConfig = Field(
+        description="Configuration for the profile db",
+        default_factory=ProfileDBConfig,
+    )
     graph_store: GraphStoreConfig = Field(
         description="Configuration for the graph",
         default_factory=GraphStoreConfig,
@@ -51,6 +56,12 @@ class MemoryConfig(BaseModel):
     )
     custom_prompt: Optional[str] = Field(
         description="Custom prompt for the memory",
+        default=None,
+    )
+
+    # TODO
+    profile_schema: Optional[str] = Field(
+        description="Profile class that need be provided.",
         default=None,
     )
 

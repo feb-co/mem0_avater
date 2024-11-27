@@ -6,8 +6,8 @@ from typing import Any, Dict, List, Optional, Union
 
 import httpx
 
-from mem0.memory.setup import get_user_id, setup_config
-from mem0.memory.telemetry import capture_client_event
+from mem0.memory.base.setup import get_user_id, setup_config
+from mem0.memory.base.telemetry import capture_client_event
 
 logger = logging.getLogger(__name__)
 warnings.filterwarnings(

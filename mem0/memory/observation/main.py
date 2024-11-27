@@ -10,10 +10,10 @@ from typing import Any, Dict
 from mem0.configs.base import MemoryConfig, MemoryItem
 from mem0.configs.prompts import get_update_memory_messages
 
-from mem0.memory.main import Memory
-from mem0.memory.telemetry import capture_event
+from mem0.memory.base.main import Memory
+from mem0.memory.base.telemetry import capture_event
 from mem0.memory.utils import get_fact_retrieval_messages, parse_messages
-from mem0.memory.storage import SQLiteManager
+from mem0.memory.base.storage import SQLiteManager
 
 from mem0.utils.factory import EmbedderFactory, LlmFactory, VectorStoreFactory
 
@@ -148,7 +148,7 @@ class AvaterMemory(Memory):
         )
         if not document_context:
             return messages
-        
+
         from datetime import datetime
         document_context = sorted(document_context, key=lambda x: datetime.fromisoformat(x['updated_at']))
         document_context = "\n".join([f"<session {i+1}>\n{mem['memory']}\n</session {i+1}>\n" for i, mem in enumerate(document_context[:20])])
@@ -197,10 +197,9 @@ class AvaterMemory(Memory):
 
         return returned_memories
 
-
     def _add_observation_to_vector_store(self, messages, metadata, filters):
         metadata['agent_id'] = 'observation'
-        
+
         new_retrieved_obs = self.memory_base_worker.get_observation(messages, metadata)
 
         retrieved_old_memory = []
@@ -281,4 +280,4 @@ class AvaterMemory(Memory):
 
         capture_event("mem0.add", self, {"version": self.api_version, "keys": list(filters.keys())})
 
-        return returned_memories    
+        return returned_memories

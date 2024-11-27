@@ -23,7 +23,7 @@ except ImportError:
 
 from mem0 import Memory, MemoryClient
 from mem0.configs.prompts import MEMORY_ANSWER_PROMPT
-from mem0.memory.telemetry import capture_client_event
+from mem0.memory.base.telemetry import capture_client_event
 
 logger = logging.getLogger(__name__)
 

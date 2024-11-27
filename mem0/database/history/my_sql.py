@@ -12,7 +12,7 @@ except ImportError:
         "Please install it using 'pip install mysql-connector-python'."
     )
 
-from mem0.history.base import HistoryDBBase
+from mem0.database.history.base import HistoryDBBase
 
 
 class Mysql(HistoryDBBase):
@@ -120,5 +120,3 @@ class Mysql(HistoryDBBase):
         with self.conn.cursor() as cursor:
             cursor.execute("DROP TABLE IF EXISTS mem_history")
         self.conn.commit()
-
-    

@@ -4,7 +4,7 @@ from unittest.mock import Mock, patch
 import pytest
 
 from mem0.configs.base import MemoryConfig
-from mem0.memory.main import Memory
+from mem0.memory.base.main import Memory
 
 
 @pytest.fixture(autouse=True)

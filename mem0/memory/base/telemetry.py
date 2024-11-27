@@ -6,7 +6,7 @@ import sys
 from posthog import Posthog
 
 import mem0
-from mem0.memory.setup import get_user_id, setup_config
+from mem0.memory.base.setup import get_user_id, setup_config
 
 MEM0_TELEMETRY = os.environ.get("MEM0_TELEMETRY", "True")
 

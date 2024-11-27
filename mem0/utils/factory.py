@@ -79,8 +79,8 @@ class VectorStoreFactory:
 
 class HistoryDBFactory:
     provider_to_class = {
-        "mysql":"mem0.history.my_sql.Mysql",
-        "sqlite":"mem0.history.sqlite.Sqlite",
+        "mysql":"mem0.database.history.my_sql.Mysql",
+        "sqlite":"mem0.database.history.sqlite.Sqlite",
     }
 
     @classmethod
@@ -93,3 +93,21 @@ class HistoryDBFactory:
             return history_db_instance(**config)
         else:
             raise ValueError(f"Unsupport HistoryDB provider: {provider_name}")
+
+
+class ProfileDBFactory:
+    provider_to_class = {
+        "mysql":"mem0.database.profile.my_sql.Mysql",
+        "sqlite":"mem0.database.profile.sqlite.Sqlite",
+    }
+
+    @classmethod
+    def create(cls, provider_name, config):
+        class_type = cls.provider_to_class.get(provider_name)
+        if class_type:
+            if not isinstance(config, dict):
+                config = config.model_dump()
+            profile_db_instance = load_class(class_type)
+            return profile_db_instance(**config)
+        else:
+            raise ValueError(f"Unsupport ProfileDB provider: {provider_name}")

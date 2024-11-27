@@ -2,7 +2,7 @@ from mem0.configs.base import MemoryConfig
 from mem0.configs.history.my_sql import MysqlConfig
 from mem0.configs.vector_stores.esvector import ESVectorConfig
 from mem0.history.configs import HistoryDBConfig
-from mem0.memory.main import Memory
+from mem0.memory.base.main import Memory
 from mem0.vector_stores.configs import VectorStoreConfig
 
 

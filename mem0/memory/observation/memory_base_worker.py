@@ -10,11 +10,11 @@ from typing import Any, Dict
 
 from mem0.configs.base import MemoryConfig, MemoryItem
 from mem0.configs.prompts import get_update_memory_messages
-from mem0.memory.telemetry import capture_event
+from mem0.memory.base.telemetry import capture_event
 from mem0.memory.utils import get_fact_retrieval_messages, parse_messages
 from mem0.utils.factory import EmbedderFactory, LlmFactory, VectorStoreFactory
-from mem0.memory.storage import SQLiteManager
-from mem0.memory_dialogue.prompt_observation import OBSERVATION_RETRIEVAL_PROMPT, OBSERVATION_FEWSHOT_PROMPT
+from mem0.memory.base.storage import SQLiteManager
+from mem0.memory_avater.prompt_observation import OBSERVATION_RETRIEVAL_PROMPT, OBSERVATION_FEWSHOT_PROMPT
 
 
 class MemoryBaseWorker:
@@ -32,7 +32,6 @@ class MemoryBaseWorker:
             if msg["role"] == "user":
                 response += f"user: {msg['content']}\n"
         return response
-
 
     def get_observation(self, messages, metadata):
         metadata = metadata or {}
