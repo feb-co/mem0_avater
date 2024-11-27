@@ -3,14 +3,14 @@ from openai import BaseModel
 from pydantic import Field, field_validator
 
 
-class HistoryDBConfig(BaseModel):
+class DBConfig(BaseModel):
     provider: str = Field(
-        description="Provider of the history database (e.g., 'sqlite', 'mysql')",
+        description="Provider of the database (e.g., 'sqlite', 'mysql')",
         default="sqlite",
     )
 
     config: Optional[dict] = Field(
-        description="Configuration for the specific history database",
+        description="Configuration for the specific database",
         default={},
     )
 
@@ -20,4 +20,4 @@ class HistoryDBConfig(BaseModel):
         if provider in ["sqlite", "mysql"]:
             return v
         else:
-            raise ValueError(f"Unsupported history database provider: {provider}")
+            raise ValueError(f"Unsupported database provider: {provider}")

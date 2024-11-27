@@ -5,8 +5,7 @@ from pydantic import BaseModel, Field
 
 from mem0.embeddings.configs import EmbedderConfig
 from mem0.graphs.configs import GraphStoreConfig
-from mem0.database.history.configs import HistoryDBConfig
-from mem0.database.profile.configs import ProfileDBConfig
+from mem0.database.configs import DBConfig
 from mem0.llms.configs import LlmConfig
 from mem0.memory.base.setup import mem0_dir
 from mem0.vector_stores.configs import VectorStoreConfig
@@ -38,13 +37,13 @@ class MemoryConfig(BaseModel):
         description="Configuration for the embedding model",
         default_factory=EmbedderConfig,
     )
-    history_db: HistoryDBConfig = Field(
+    history_db: DBConfig = Field(
         description="Configuration for the history db",
-        default_factory=HistoryDBConfig,
+        default_factory=DBConfig,
     )
-    profile_db: ProfileDBConfig = Field(
+    profile_db: DBConfig = Field(
         description="Configuration for the profile db",
-        default_factory=ProfileDBConfig,
+        default_factory=DBConfig,
     )
     graph_store: GraphStoreConfig = Field(
         description="Configuration for the graph",

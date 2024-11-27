@@ -3,7 +3,7 @@ import json
 from mem0.configs.base import MemoryConfig
 from mem0.configs.history.my_sql import MysqlConfig
 from mem0.configs.vector_stores.esvector import ESVectorConfig
-from mem0.database.history.configs import HistoryDBConfig
+from mem0.database.configs import DBConfig
 from mem0.vector_stores.configs import VectorStoreConfig
 
 
@@ -45,18 +45,13 @@ def get_memory_config():
             endpoint="http://localhost:9200",
         ).model_dump(),
     )
-    config.history_db = HistoryDBConfig(
+    config.history_db = DBConfig(
         provider="mysql",
         config=MysqlConfig(
             url="mysql+aiomysql://dfoadmin:F2RKGt75.&@digitalray-mysql-dev.mysql.database.azure.com:3306/digital_ray_dev"
         ).model_dump(),
     )
-    config.profile_db = HistoryDBConfig(
-        provider="mysql",
-        config=MysqlConfig(
-            url="mysql+aiomysql://dfoadmin:F2RKGt75.&@digitalray-mysql-dev.mysql.database.azure.com:3306/digital_ray_dev"
-        ).model_dump(),
-    )
+    config.profile_db = config.history_db
 
     # schema
     config.profile_schema = ProfileSchema
