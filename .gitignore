@@ -187,3 +187,5 @@ eval/
 qdrant_storage/
 .crossnote
 testing.ipynb
+
+demo.py
