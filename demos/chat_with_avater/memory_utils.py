@@ -1,4 +1,6 @@
 import json
+from dataclasses import dataclass, field
+from typing import Optional, Dict, List
 
 from mem0.configs.base import MemoryConfig
 from mem0.configs.history.my_sql import MysqlConfig
@@ -7,31 +9,35 @@ from mem0.database.configs import DBConfig
 from mem0.vector_stores.configs import VectorStoreConfig
 
 
-class ProfileSchema:
+@dataclass
+class ProfileDetail:
+    value: Optional[str] = None
+    refused: bool = False
+
+
+@dataclass
+class UserProfileDetails:
+    basic: Dict[str, ProfileDetail] = field(default_factory=dict)
+    work_life: Dict[str, ProfileDetail] = field(default_factory=dict)
+    eip: Dict[str, ProfileDetail] = field(default_factory=dict)
+    
     @classmethod
     def from_json_str(cls, json_str: str):
         json_data = json.loads(json_str)
         user_profile = cls()
 
-        for key, value in json_data.get("basic", {}).items():
-            if key in UserProfilePrompts.BASIC_PROFILE_KEYWORDS or key == "Name":
-                user_profile.basic[key] = ProfileDetail(
-                    value=value.get("value", None), refused=value.get("refused", False)
-                )
-
-        for key, value in json_data.get("work_life", {}).items():
-            if key in UserProfilePrompts.WORK_LIFE_PROFILE_KEYWORDS:
-                user_profile.work_life[key] = ProfileDetail(
-                    value=value.get("value", None), refused=value.get("refused", False)
-                )
-        for key, value in json_data.get("eip", {}).items():
-            if key in UserProfilePrompts.EIP_PROFILE_KEYWORDS:
-                user_profile.eip[key] = ProfileDetail(
+        for category in cls.get_profile_category():
+            for key, value in json_data.get(category, {}).items():
+                getattr(user_profile, category)[key] = ProfileDetail(
                     value=value.get("value", None), refused=value.get("refused", False)
                 )
 
         return user_profile
 
+    @classmethod
+    def get_profile_category(cls):
+        return ["basic", "work_life", "eip"]
+        
 
 def get_memory_config():
     config = MemoryConfig()
@@ -54,7 +60,7 @@ def get_memory_config():
     config.profile_db = config.history_db
 
     # schema
-    config.profile_schema = ProfileSchema
+    config.profile_schema = UserProfileDetails
     
     # llm
 
