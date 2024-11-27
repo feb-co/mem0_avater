@@ -2,6 +2,8 @@ import gradio as gr
 from openai import OpenAI
 from typing import List, Tuple
 
+from .memory_utils import get_memory_config
+
 
 class ChatAvater:
     def __init__(self):
