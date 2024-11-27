@@ -1,5 +1,5 @@
 [tool.poetry]
-name = "mem0avater"
+name = "mem0_avater"
 version = "0.0.1"
 description = "Long-term memory for AI Agents"
 authors = ["VrOPCO <founders@vropco.ai>"]

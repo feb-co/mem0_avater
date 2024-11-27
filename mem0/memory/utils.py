@@ -1,4 +1,4 @@
-from mem0.configs.prompts import FACT_RETRIEVAL_PROMPT
+from mem0.configs.prompts.base_prompts import FACT_RETRIEVAL_PROMPT
 
 
 def get_fact_retrieval_messages(message):

@@ -11,7 +11,7 @@ import pytz
 from pydantic import ValidationError
 
 from mem0.configs.base import MemoryConfig, MemoryItem
-from mem0.configs.prompts import get_update_memory_messages
+from mem0.configs.prompts.base_prompts import get_update_memory_messages
 
 from mem0.memory.base.setup import setup_config
 from mem0.memory.base.telemetry import capture_event
